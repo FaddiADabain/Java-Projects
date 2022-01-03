@@ -1,0 +1,78 @@
+import java.util.*;
+
+public class MainMenu 
+{
+	public static void main(String[] args)
+	{
+		Scanner input = new Scanner(System.in);
+		boolean playing = true;
+		boolean gameOver;
+		Board board = new Board();
+		Player[] players = { new Player('X'), new Player('O') };
+		String playingAnswer;
+		int playerCounter;
+		int row = 0;
+		int col = 0;
+		boolean spotIsPlayed = false;
+
+		while(playing)
+		{
+			playerCounter = 0;
+			gameOver = false;
+			board.createBoard();
+			
+			while(!gameOver)
+			{
+				
+				board.displayBoard();
+
+				do
+				{
+					do
+					{
+						System.out.println("\nPlayer " + players[playerCounter % players.length].getPlayerChar() + " what location would you like to play? ex: 2 2 is the middle spot.");
+						row = input.nextInt();
+						col = input.nextInt();
+					} while(row > 3 || row < 1 || col > 3 || col < 1);
+					
+					row = (row - 1) * 2;
+					col = (col - 1) * 2;
+					
+					spotIsPlayed = board.isPlayed(row, col);
+					
+					if(spotIsPlayed)
+						board.displayBoard();
+				} while(spotIsPlayed);
+				
+				board.play(row, col, players[playerCounter % players.length]);
+				
+				gameOver = board.checkWon(players[playerCounter % players.length]);
+
+				playerCounter++;
+				
+				if (board.isFull())
+					gameOver = true;
+			}
+			
+
+			board.displayBoard();
+			
+			if(board.isFull())
+				System.out.println("\nThe game was a draw.");
+			else
+				System.out.println("\nPlayer " + players[(playerCounter - 1) % players.length].getPlayerChar() + " won.");
+			
+			do 
+			{
+				System.out.println("\nWould you like to continue?");
+				System.out.print("Input y to continue and n to terminate: ");
+				playingAnswer = input.next();
+				
+				if(playingAnswer.equals("n"))
+					playing = false;
+			} while(!playingAnswer.equals("y") && !playingAnswer.equals("n"));
+		}
+
+		input.close();
+	}
+}
