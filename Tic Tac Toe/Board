@@ -1,0 +1,83 @@
+
+public class Board
+{
+	private char board[][];
+
+	Board()
+	{
+
+	}
+
+	public void createBoard()
+	{
+		board = new char[][] { { ' ', '|', ' ', '|', ' ' },
+			{ '-', '+', '-', '+', '-' },
+			{ ' ', '|', ' ', '|', ' ' },
+			{ '-', '+', '-', '+', '-' },
+			{ ' ', '|', ' ', '|', ' ' }
+		};
+	}
+
+	public void displayBoard()
+	{
+		System.out.println();
+		for(int row = 0; row < board.length; row++) 
+		{
+			for(int col = 0; col < board[row].length; col++)
+				System.out.print(board[row][col]);
+			System.out.println();
+		}
+	}
+
+	public void play(int row, int col, Player p)
+	{
+		board[row][col] = p.getPlayerChar();
+	}
+	
+	public boolean isPlayed(int row, int col)
+	{
+		if(board[row][col] == 'X' || board[row][col] == 'O')
+			return true;
+		return false;
+	}
+
+	public boolean isFull()
+	{
+		for(int row = 0; row < board.length; row++)
+			for(int col = 0; col < board[row].length; col++)
+				if(board[row][col] == ' ')
+					return false;
+		return true;
+	}
+	
+	public boolean checkWon(Player p)
+	{
+		boolean won = false;
+		
+		// Checks if winning on row
+		if( board[0][0] == p.getPlayerChar() && board[0][2] == p.getPlayerChar() && board[0][4] == p.getPlayerChar() )
+			won = true;
+		else if( board[2][0] == p.getPlayerChar() && board[2][2] == p.getPlayerChar() && board[2][4] == p.getPlayerChar() )
+			won = true;
+		else if( board[4][0] == p.getPlayerChar() && board[4][2] == p.getPlayerChar() && board[4][4] == p.getPlayerChar() )
+			won = true;
+		
+		// Checks if winning on column
+		else if( board[0][0] == p.getPlayerChar() && board[2][0] == p.getPlayerChar() && board[4][0] == p.getPlayerChar() )
+			won = true;
+		else if( board[0][2] == p.getPlayerChar() && board[2][2] == p.getPlayerChar() && board[4][2] == p.getPlayerChar() )
+			won = true;
+		else if( board[0][4] == p.getPlayerChar() && board[2][4] == p.getPlayerChar() && board[4][4] == p.getPlayerChar() )
+			won = true;
+		
+		// Checks if winning across
+		else if( board[0][0] == p.getPlayerChar() && board[2][2] == p.getPlayerChar() && board[4][4] == p.getPlayerChar() )
+			won = true;
+		else if( board[0][4] == p.getPlayerChar() && board[2][2] == p.getPlayerChar() && board[4][0] == p.getPlayerChar() )
+			won = true;
+		
+		// Returns won
+		return won;
+	}
+	
+}
