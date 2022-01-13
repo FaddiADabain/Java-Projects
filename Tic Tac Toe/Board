@@ -1,14 +1,9 @@
-
 public class Board
 {
 	private char board[][];
 
+	// Creates a fresh clean board
 	Board()
-	{
-
-	}
-
-	public void createBoard()
 	{
 		board = new char[][] { { ' ', '|', ' ', '|', ' ' },
 			{ '-', '+', '-', '+', '-' },
@@ -18,6 +13,7 @@ public class Board
 		};
 	}
 
+	// Displays board
 	public void displayBoard()
 	{
 		System.out.println();
@@ -29,11 +25,13 @@ public class Board
 		}
 	}
 
+	// Takes the users input and their player to play the spot
 	public void play(int row, int col, Player p)
 	{
 		board[row][col] = p.getPlayerChar();
 	}
 	
+	// Checks if the spot is played or empty
 	public boolean isPlayed(int row, int col)
 	{
 		if(board[row][col] == 'X' || board[row][col] == 'O')
@@ -41,6 +39,7 @@ public class Board
 		return false;
 	}
 
+	// Checks if the board is full
 	public boolean isFull()
 	{
 		for(int row = 0; row < board.length; row++)
@@ -50,8 +49,10 @@ public class Board
 		return true;
 	}
 	
+	// Checks all the winning conditions
 	public boolean checkWon(Player p)
 	{
+		// Won is always false unless one of the statements below are true
 		boolean won = false;
 		
 		// Checks if winning on row
@@ -76,8 +77,6 @@ public class Board
 		else if( board[0][4] == p.getPlayerChar() && board[2][2] == p.getPlayerChar() && board[4][0] == p.getPlayerChar() )
 			won = true;
 		
-		// Returns won
 		return won;
 	}
-	
 }
