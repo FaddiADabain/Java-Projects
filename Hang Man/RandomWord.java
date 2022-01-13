@@ -6,7 +6,8 @@ public class RandomWord {
 	// Picks a random word from the text file and turns it into a char array for easy comparisons
 	public char[] randomWordPicker()
 	{
-		File wordFile = new File("F:\\Eclipse\\Eclipse Projects\\Hang Man\\src\\words.txt");
+		String dir = System.getProperty("user.dir");
+		File wordFile = new File(dir + "\\src\\words.txt");
 		RandomAccessFile file;
 		char[] word = null;
 
