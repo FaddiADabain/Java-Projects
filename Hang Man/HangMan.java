@@ -52,8 +52,6 @@ public class HangMan
 		}
 	}
 
-	
-
 	// Takes in user input then compares it to the letters in the random word. If the letter isn't in the word then it sends a 1 to update the counter outside of the method.
 	public static int revealUnsolvedWord(char[] unsolvedWord, char[] pickedWord)
 	{
