@@ -34,7 +34,7 @@ public class MainMenu
 			{
 
 				board.displayBoard();
-				
+
 				// Checks to see if it's the player's turn or the game is set to multiplayer
 				if(players[playerCounter % players.length].getPlayerChar() == 'X' || numPlayers == 2)
 					// Repeats if the player's input spot is played
@@ -47,15 +47,15 @@ public class MainMenu
 							row = input.nextInt();
 							col = input.nextInt();
 						} while(row > 3 || row < 1 || col > 3 || col < 1);
-						
+
 						row = (row - 1) * 2;
 						col = (col - 1) * 2;
-						
+
 						// Validates spot being played
 						if(board.isPlayed(row, col))
 							board.displayBoard();
 					} while(board.isPlayed(row, col));
-				
+
 				// Plays Ai's random spot
 				else
 					do 
@@ -63,19 +63,19 @@ public class MainMenu
 						aiPlay(ai);
 						System.out.println(ai.getRow() + " " + ai.getCol());
 					} while(board.isPlayed(ai.getRow(), ai.getCol()));
-					
+
 				// Plays the user's input into the board
 				if(players[playerCounter % players.length].getPlayerChar() == 'X' || numPlayers == 2)
 					board.play(row, col, players[playerCounter % players.length]);
 				else
 					board.play(ai.getRow(), ai.getCol(), players[playerCounter % players.length]);
-				
+
 				if(board.checkWon(players[playerCounter % players.length]))
 					won = true;
-				
+
 				playerCounter++;
 			}
-			
+
 			board.displayBoard();
 			playerCounter--;
 
@@ -100,9 +100,9 @@ public class MainMenu
 	// Allows Ai to play by creating random numbers for it's inputs
 	public static void aiPlay(AI ai)
 	{
-       	int row = (int)(Math.random() * 3) * 2;
-        ai.setRow(row);
-		
+		int row = (int)(Math.random() * 3) * 2;
+		ai.setRow(row);
+
 		int col = (int)(Math.random() * 3) * 2;
 		ai.setCol(col);
 	}
