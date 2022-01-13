@@ -94,10 +94,10 @@ public class MainMenu
 	// Allows Ai to play by creating random numbers for it's inputs
 	public static void aiPlay(AI ai)
 	{
-        int row = (int)(Math.random() * 3) + 1;
-        row -= 1;
-        row *= 2;
-        ai.setRow(row);
+       	 	int row = (int)(Math.random() * 3) + 1;
+        	row -= 1;
+        	row *= 2;
+        	ai.setRow(row);
 		
 		int col = (int)(Math.random() * 3) + 1;
 		col -= 1;
