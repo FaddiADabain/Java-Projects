@@ -1,2 +1,2 @@
 # Java-Projects
-This shows all the java projects that I have worked on througout my java career.
+This shows some of the java projects that I have worked on througout my java career.
