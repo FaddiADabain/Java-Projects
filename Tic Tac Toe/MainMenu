@@ -12,6 +12,7 @@ public class MainMenu
 		int row = 0;
 		int col = 0;
 		int numPlayers;
+		boolean won;
 		AI ai = new AI();
 
 		// Validates user's input for the number of players
@@ -25,10 +26,11 @@ public class MainMenu
 		while(!playingAnswer.equals("n"))
 		{
 			playerCounter = 0;
+			won = false;
 			board = new Board();
 
 			// Repeats if the game is not won or tied
-			while(!board.checkWon(players[playerCounter % players.length]) && !board.isFull())
+			while(!won && !board.isFull())
 			{
 
 				board.displayBoard();
@@ -68,16 +70,20 @@ public class MainMenu
 				else
 					board.play(ai.getRow(), ai.getCol(), players[playerCounter % players.length]);
 				
+				if(board.checkWon(players[playerCounter % players.length]))
+					won = true;
+				
 				playerCounter++;
 			}
 			
 			board.displayBoard();
+			playerCounter--;
 
 			// Displays winning condition outputs
 			if(board.isFull())
 				System.out.println("\nThe game was a draw.");
 			else
-				System.out.println("\nPlayer " + players[((playerCounter - 1) % players.length) - 1].getPlayerChar() + " won.");
+				System.out.println("\nPlayer " + players[playerCounter % players.length].getPlayerChar() + " won.");
 
 			// Ask user if they want to continue playing
 			do 
@@ -94,14 +100,10 @@ public class MainMenu
 	// Allows Ai to play by creating random numbers for it's inputs
 	public static void aiPlay(AI ai)
 	{
-       	 	int row = (int)(Math.random() * 3) + 1;
-        	row -= 1;
-        	row *= 2;
-        	ai.setRow(row);
+       	int row = (int)(Math.random() * 3) * 2;
+        ai.setRow(row);
 		
-		int col = (int)(Math.random() * 3) + 1;
-		col -= 1;
-		col *= 2;
+		int col = (int)(Math.random() * 3) * 2;
 		ai.setCol(col);
 	}
 }
