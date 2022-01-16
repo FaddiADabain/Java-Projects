@@ -23,13 +23,7 @@ public class HangMan {
                 System.out.print(" > ");
                 counter += revealUnsolvedWord(unsolvedWord, pickedWord);
 
-                if (counter >= 6) {
-                    System.out.println("You lost.");
-                    won = true;
-                }
-
-                if (isWin(unsolvedWord))
-                    won = true;
+                won = checkIfWon(counter, unsolvedWord);
             }
 
             System.out.print("The word is ");
@@ -45,6 +39,16 @@ public class HangMan {
             if (playAgain == 'n')
                 playing = false;
         }
+    }
+
+    private static boolean checkIfWon(int counter, char[] unsolvedWord) {
+        if (isWin(unsolvedWord))
+            return true;
+        else if (counter >= 6) {
+            System.out.println("You lost.");
+            return true;
+        }
+        return false;
     }
 
     // Takes in user input then compares it to the letters in the random word. If the letter isn't in the word then it sends a 1 to update the counter.
