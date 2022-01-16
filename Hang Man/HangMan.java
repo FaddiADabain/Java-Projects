@@ -33,8 +33,11 @@ public class HangMan {
             else
                 System.out.println(". You missed " + counter + " times.");
 
-            System.out.print("Do you want to guess another word? Enter y or n: ");
-            char playAgain = scan.next().toLowerCase().charAt(0);
+            char playAgain = ' ';
+            while (playAgain != 'y' && playAgain != 'n') {
+                System.out.print("Do you want to guess another word? Enter y or n: ");
+                playAgain = scan.next().toLowerCase().charAt(0);
+            }
 
             if (playAgain == 'n')
                 playing = false;
