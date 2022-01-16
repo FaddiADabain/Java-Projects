@@ -69,12 +69,11 @@ public class HangMan {
 
         if (twice)
             System.out.println("\t" + input + " is already in the word");
-
-        if (isContained == pickedWord.length) {
+        else if (isContained == pickedWord.length) {
             System.out.println("\t" + input + " is not in the word");
             return 1;
-        } else
-            return 0;
+        }
+        return 0;
     }
 
     // Prints all the letters in the unsolved word
